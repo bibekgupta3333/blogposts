@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-11 mx-auto">
+      <div class="row">
+        <div class="col-md-6">
+          {% for obj in objects %}
+          <div class="card shadow m-3 w-75">
+            <img src="" alt="" class="card-img-top img-fluid" />
+            <div class="card-body">
+              <h1 class="card-title">{{ obj.title|upper }}</h1>
+              <p class="card-text text-dark h6">
+                {{obj.body|safe|truncatewords:20}}
+              </p>
+              <a
+                class="btn btn-light btn-large"
+                href="{% url 'blogposts:detail' author=obj.author author_id=obj.author.id slug=obj.slug %}"
+                >Read More</a
+              >
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="offset-md-1 col-md-3">
+          <div class="card">
+            <div class="card-header">
+              Authors
+            </div>
+            <ul class="list-group list-group-flush">
+              {% for user in users %}
+
+              <li class="list-group-item">
+                <a
+                  href="{% url 'blogposts:user_post_list' author=user.username author_id=user.id  %}"
+                  >{{ user.username }}
+                </a>
+              </li>
+
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% extends 'base.html' %} {% block content %} {% for obj in
+objects %}
+<br />{{forloop.counter}}|<a
+  href="{% url 'blogposts:detail' author=obj.author author_id=obj.author.id slug=obj.slug %}"
+  >{{obj.title}}</a
+>|{{obj.body|safe}}|<br />
+<a
+  href="{% url 'blogposts:update' author=obj.author author_id=obj.author.id slug=obj.slug %}"
+  >Update</a
+>
+{% empty %}
+<h1>no posts has been made</h1>
+{% endfor %} {% endblock %}

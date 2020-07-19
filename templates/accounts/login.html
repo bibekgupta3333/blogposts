@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}
+Login
+
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="container">
+    <div
+      class="col-md-8 mt-5 mx-auto justify-content-center align-items-center"
+    >
+      <div class="m-5 shadow p-5 text-dark">
+        <h1>LOGIN</h1>
+        <p>Please, use the following form to log-in:</p>
+
+        <form method="post">
+          {{ form.as_p }} {% csrf_token %}
+          <p>
+            <input
+              class="btn btn-secondary btn-lg"
+              type="submit"
+              value="Log in"
+            />
+          </p>
+        </form>
+        <p>
+          <a class="text-muted" href="{% url 'accounts:signup'%}"
+            >Don't Have Your Account? Just SignUp</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
